@@ -14,11 +14,12 @@ struct TaskRowView: View {
 
     var body: some View {
         HStack {
-            Toggle("\(viewModel.task.title)", isOn: Binding<Bool>(
-                    get: {self.viewModel.completed },
-                    set: {self.viewModel.completed = $0}
-                )
-            )
+            TaskCheckMark(isOn: Binding<Bool>(
+                get: {self.viewModel.completed },
+                set: {self.viewModel.completed = $0}
+            ), size: 20)
+            Text("\(viewModel.task.title)")
+            Spacer()
         }.padding()
     }
 }

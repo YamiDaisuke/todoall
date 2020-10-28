@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81B2C2642543884C00F18B79 /* TaskCheckMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B2C2632543884C00F18B79 /* TaskCheckMark.swift */; };
 		81DCC296254257E3007A20DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DCC295254257E3007A20DF /* AppDelegate.swift */; };
 		81DCC298254257E3007A20DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DCC297254257E3007A20DF /* SceneDelegate.swift */; };
 		81DCC29A254257E3007A20DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DCC299254257E3007A20DF /* ContentView.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		81B2C2632543884C00F18B79 /* TaskCheckMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckMark.swift; sourceTree = "<group>"; };
 		81DCC292254257E3007A20DF /* TodoAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoAll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81DCC295254257E3007A20DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81DCC297254257E3007A20DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		81B2C262254387C900F18B79 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				81B2C2632543884C00F18B79 /* TaskCheckMark.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		81DCC289254257E3007A20DF = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +123,7 @@
 		81DCC294254257E3007A20DF /* TodoAll */ = {
 			isa = PBXGroup;
 			children = (
+				81B2C262254387C900F18B79 /* UI */,
 				81DCC2D2254267B8007A20DF /* View */,
 				81DCC2CF254263FC007A20DF /* ViewModel */,
 				81DCC2C5254257F5007A20DF /* Model */,
@@ -334,6 +345,7 @@
 				81DCC2C825425F60007A20DF /* Task.swift in Sources */,
 				81DCC296254257E3007A20DF /* AppDelegate.swift in Sources */,
 				81DCC298254257E3007A20DF /* SceneDelegate.swift in Sources */,
+				81B2C2642543884C00F18B79 /* TaskCheckMark.swift in Sources */,
 				81DCC2CE254260FD007A20DF /* ServiceError.swift in Sources */,
 				81DCC29A254257E3007A20DF /* ContentView.swift in Sources */,
 				81DCC2D8254275BF007A20DF /* TaskRowViewModel.swift in Sources */,
