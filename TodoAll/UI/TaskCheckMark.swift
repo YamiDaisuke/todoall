@@ -98,6 +98,7 @@ struct TaskCheckMark: View {
     }
 }
 
+#if DEBUG
 struct TaskCheckMark_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
@@ -109,3 +110,4 @@ struct TaskCheckMark_Previews: PreviewProvider {
         }
     }
 }
+#endif

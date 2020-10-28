@@ -24,6 +24,7 @@ struct TaskRowView: View {
     }
 }
 
+#if DEBUG
 struct TaskRowView_Previews: PreviewProvider {
     static var previews: some View {
         let mock = MockTaskService()
@@ -32,3 +33,4 @@ struct TaskRowView_Previews: PreviewProvider {
         return TaskRowView(viewModel: vm)
     }
 }
+#endif
