@@ -27,6 +27,10 @@ class TaskListViewModel: ObservableObject, Identifiable {
         self.userId = userId
     }
 
+    func refresh() {
+        self.fetchTasks(forUser: self.userId)
+    }
+    
     func fetchTasks(forUser userId: Int) {
         self.service.getTasks(forUser: userId)
             .receive(on: DispatchQueue.main)
@@ -47,5 +51,10 @@ class TaskListViewModel: ObservableObject, Identifiable {
                 self.dataSource = data
         }
         .store(in: &self.disposables)
+    }
+    
+    func getCreateViewModel() -> CreateTaskViewModel {
+        let vm = CreateTaskViewModel(service: self.service, userId: self.userId)
+        return vm
     }
 }

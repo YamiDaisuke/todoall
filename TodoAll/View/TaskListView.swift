@@ -29,17 +29,14 @@ struct TaskListView: View {
     }
 
     var body: some View {
-        NavigationView {
-            List {
-                if viewModel.dataSource.isEmpty {
-                    emptySection
-                } else {
-                    taskList
-                }
+        List {
+            if viewModel.dataSource.isEmpty {
+                emptySection
+            } else {
+                taskList
             }
-            .listStyle(GroupedListStyle())
-            .navigationBarTitle("My Tasks")
         }
+        .listStyle(GroupedListStyle())
     }
 }
 

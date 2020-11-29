@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 protocol TaskService {
-    var store: Store? { get }
+    var store: Store? { get set }
     func getTasks(forUser user: Int) -> AnyPublisher<[Task], ServiceError>
     func create(task: Task) -> AnyPublisher<Task?, ServiceError>
 }
@@ -18,7 +18,7 @@ protocol TaskService {
 class TaskServiceProvider: TaskService {
     var store: Store?
     
-    init(store: Store) {
+    init(store: Store = DefaultStore.shared) {
         self.store = store
     }
     
@@ -33,8 +33,8 @@ class TaskServiceProvider: TaskService {
 
 #if DEBUG
 class MockTaskService: TaskService {
-    var store: Store? = nil
-    
+    var store: Store?
+
     func getTasks(forUser user: Int) -> AnyPublisher<[Task], ServiceError> {
         let mockData = [
             Task(id: 1, title: "My Mock task"),

@@ -19,10 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-        let mock = MockTaskService()
-        let vm = TaskListViewModel(service: mock, userId: 1)
-        let view = TaskListView(viewModel: vm)
-
+        DefaultStore.shared = LocalStore()
+        let service = TaskServiceProvider(store: LocalStore())
+        let vm = TaskListViewModel(service: service, userId: 1)
+        let view = HomeView(viewModel: vm)
+        
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
