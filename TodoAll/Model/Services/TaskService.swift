@@ -10,26 +10,30 @@ import UIKit
 import Combine
 
 protocol TaskService {
-    var provider: Provider? { get }
+    var store: Store? { get }
     func getTasks(forUser user: Int) -> AnyPublisher<[Task], ServiceError>
+    func create(task: Task) -> AnyPublisher<Task?, ServiceError>
 }
 
-class TaskServiceProvider {
-    var provider: Provider
+class TaskServiceProvider: TaskService {
+    var store: Store?
     
-    init(provider: Provider) {
-        self.provider = provider
+    init(store: Store) {
+        self.store = store
     }
     
     func getTasks(forUser user: Int) -> AnyPublisher<[Task], ServiceError> {
-        return provider.list()
-            .eraseToAnyPublisher()
+        return store!.list().eraseToAnyPublisher()
+    }
+    
+    func create(task: Task) -> AnyPublisher<Task?, ServiceError> {
+        return store!.create(task).eraseToAnyPublisher()
     }
 }
 
 #if DEBUG
 class MockTaskService: TaskService {
-    var provider: Provider? = nil
+    var store: Store? = nil
     
     func getTasks(forUser user: Int) -> AnyPublisher<[Task], ServiceError> {
         let mockData = [
@@ -40,6 +44,15 @@ class MockTaskService: TaskService {
         ]
         
         return Just(mockData)
+            .mapError({ _ in ServiceError(code: -1, message: "never") })
+            .eraseToAnyPublisher()
+    }
+    
+    func create(task: Task) -> AnyPublisher<Task?, ServiceError> {
+        var task = task
+        task.id = 1
+        
+        return Just(task)
             .mapError({ _ in ServiceError(code: -1, message: "never") })
             .eraseToAnyPublisher()
     }

@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class LocalProvider: Provider {
+class LocalStore: Store {
     private static var storeNames = [
         Task.typeName: "tasks"
     ]
@@ -18,10 +18,19 @@ class LocalProvider: Provider {
         storeNames[String(describing: type)] = String(describing: type)
     }
     
+    func newId(forModel model: Any.Type?) -> Int {
+        let userDefaults = UserDefaults.standard
+        
+        let next = userDefaults.integer(forKey: "IDS") + 1
+        userDefaults.setValue(next, forUndefinedKey: "IDS")
+        
+        return next
+    }
+    
     private func getAllData<T>() -> [T] where T : Identifiable  & Codable {
         let userDefaults = UserDefaults.standard
         
-        guard let storeName = LocalProvider.storeNames[T.typeName] else { return [] }
+        guard let storeName = LocalStore.storeNames[T.typeName] else { return [] }
         
         guard let data = userDefaults.data(forKey:  storeName) else { return [] }
         
@@ -37,7 +46,7 @@ class LocalProvider: Provider {
     private func save<T>(data: [T]) where T : Identifiable  & Codable {
         let userDefaults = UserDefaults.standard
         
-        guard let storeName = LocalProvider.storeNames[T.typeName] else { return }
+        guard let storeName = LocalStore.storeNames[T.typeName] else { return }
         
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(data) {

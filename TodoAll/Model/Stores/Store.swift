@@ -14,7 +14,7 @@ enum SortDirection {
     case descending
 }
 
-protocol Provider {
+protocol Store {
     func list<T>(filter: [String:Any]?, sort: [String: SortDirection]?) -> Future<[T], ServiceError>  where T: Identifiable & Codable
     func get<T>(byId id: T.ID) -> Future<T?, ServiceError>  where T: Identifiable & Codable
     func create<T>(_ element: T) -> Future<T?, ServiceError> where T: Identifiable & Codable
@@ -22,8 +22,12 @@ protocol Provider {
     func delete<T>(byId id: T.ID) -> Future<T?, ServiceError>  where T: Identifiable & Codable
 }
 
-extension Provider {
+extension Store {
     func list<T>(filter: [String:Any]? = nil, sort: [String: SortDirection]? = nil) -> Future<[T], ServiceError>  where T: Identifiable & Codable {
         return list(filter: filter, sort: sort)
     }
+}
+
+class DefaultStore {
+    public static var shared: Store! 
 }

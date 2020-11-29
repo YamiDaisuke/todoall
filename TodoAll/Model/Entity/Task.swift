@@ -9,7 +9,7 @@
 import UIKit
 
 struct Task: Identifiable, Codable {
-    var id: Int
+    var id: Int?
     var title: String
     var description: String?
     var dueDate: Date?
