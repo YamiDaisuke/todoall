@@ -13,6 +13,7 @@ protocol TaskService {
     var store: Store? { get set }
     func getTasks(forUser user: Int) -> AnyPublisher<[Task], ServiceError>
     func create(task: Task) -> AnyPublisher<Task?, ServiceError>
+    func update(task: Task) -> AnyPublisher<Task?, ServiceError>
 }
 
 class TaskServiceProvider: TaskService {
@@ -28,6 +29,10 @@ class TaskServiceProvider: TaskService {
     
     func create(task: Task) -> AnyPublisher<Task?, ServiceError> {
         return store!.create(task).eraseToAnyPublisher()
+    }
+    
+    func update(task: Task) -> AnyPublisher<Task?, ServiceError> {
+        return store!.update(task).eraseToAnyPublisher()
     }
 }
 
@@ -52,6 +57,12 @@ class MockTaskService: TaskService {
         var task = task
         task.id = 1
         
+        return Just(task)
+            .mapError({ _ in ServiceError(code: -1, message: "never") })
+            .eraseToAnyPublisher()
+    }
+    
+    func update(task: Task) -> AnyPublisher<Task?, ServiceError> {
         return Just(task)
             .mapError({ _ in ServiceError(code: -1, message: "never") })
             .eraseToAnyPublisher()

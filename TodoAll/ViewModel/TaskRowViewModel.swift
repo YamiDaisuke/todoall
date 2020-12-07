@@ -18,15 +18,31 @@ class TaskRowViewModel: ObservableObject, Identifiable {
     init(service: TaskService, task: Task, scheduler: DispatchQueue = DispatchQueue(label: "TaskRowViewModel")) {
         self.service = service
         self.task = task
+        self.completed = self.task.completed
         
         $completed
             .dropFirst()
             .debounce(for: .seconds(0.1), scheduler: scheduler)
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: update(taskStatus:))
             .store(in: &disposables)
     }
 
     func update(taskStatus status: Bool) {
-        // TODO:
+        task.completed = status
+        self.service.update(task: self.task)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self](value) in
+                switch value {
+                case .finished:
+                    break
+                case .failure(let e):
+                    print("Error: \(e)")
+                }
+            } receiveValue: { (data) in
+                guard let data = data else { return }
+                self.task = data
+                self.completed = data.completed
+            }.store(in: &self.disposables)
     }
 }

@@ -15,8 +15,8 @@ struct TaskRowView: View {
     var body: some View {
         HStack {
             TaskCheckMark(isOn: Binding<Bool>(
-                get: {self.viewModel.completed },
-                set: {self.viewModel.completed = $0}
+                get: { self.viewModel.completed },
+                set: { self.viewModel.completed = $0 }
             ), size: 20)
             Text("\(viewModel.task.title)")
             Spacer()
