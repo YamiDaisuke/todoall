@@ -18,16 +18,16 @@ class LocalStore: Store {
         storeNames[String(describing: type)] = String(describing: type)
     }
     
-    func newId(forModel model: Any.Type?) -> Int {
+    func newId(forModel model: Any.Type) -> Int {
         let userDefaults = UserDefaults.standard
-        
-        let next = userDefaults.integer(forKey: "IDS") + 1
-        userDefaults.setValue(next, forUndefinedKey: "IDS")
+        let key = "\(String(describing: model))IDS"
+        let next = userDefaults.integer(forKey: key) + 1
+        userDefaults.setValue(next, forKey: key)
         
         return next
     }
     
-    private func getAllData<T>() -> [T] where T : Identifiable  & Codable {
+    private func getAllData<T>() -> [T] where T : Entity {
         let userDefaults = UserDefaults.standard
         
         guard let storeName = LocalStore.storeNames[T.typeName] else { return [] }
@@ -43,7 +43,7 @@ class LocalStore: Store {
         return []
     }
     
-    private func save<T>(data: [T]) where T : Identifiable  & Codable {
+    private func save<T>(data: [T]) where T : Entity {
         let userDefaults = UserDefaults.standard
         
         guard let storeName = LocalStore.storeNames[T.typeName] else { return }
@@ -54,7 +54,7 @@ class LocalStore: Store {
         }
     }
     
-    func list<T>(filter: [String : Any]?, sort: [String : SortDirection]?) -> Future<[T], ServiceError> where T : Identifiable  & Codable {
+    func list<T>(filter: [String : Any]?, sort: [String : SortDirection]?) -> Future<[T], ServiceError> where T : Entity {
         return Future { promise in
             DispatchQueue.global(qos: .background).async {
                 promise(.success(self.getAllData()))
@@ -62,7 +62,7 @@ class LocalStore: Store {
         }
     }
     
-    func get<T>(byId id: T.ID) -> Future<T?, ServiceError> where T : Identifiable & Codable  {
+    func get<T>(byId id: T.ID) -> Future<T?, ServiceError> where T : Entity  {
         return Future { promise in
             DispatchQueue.global(qos: .background).async {
                 let data: T? = self.getAllData().first(where: { $0.id == id })
@@ -71,18 +71,20 @@ class LocalStore: Store {
         }
     }
     
-    func create<T>(_ element: T) -> Future<T?, ServiceError> where T : Identifiable & Codable {
+    func create<T>(_ element: T) -> Future<T?, ServiceError> where T : Entity {
         return Future { promise in
             DispatchQueue.global(qos: .background).async {
+                var mutableElement = element
                 var all: [T] = self.getAllData()
-                all.append(element)
+                mutableElement.id = self.newId(forModel: T.self) as! T.ID
+                all.append(mutableElement)
                 self.save(data: all)
-                promise(.success(element))
+                promise(.success(mutableElement))
             }
         }
     }
     
-    func update<T>(_ element: T) -> Future<T?, ServiceError> where T : Identifiable & Codable {
+    func update<T>(_ element: T) -> Future<T?, ServiceError> where T : Entity {
         return Future { promise in
             DispatchQueue.global(qos: .background).async {
                 var all: [T] = self.getAllData()
@@ -94,7 +96,7 @@ class LocalStore: Store {
         }
     }
     
-    func delete<T>(byId id: T.ID) -> Future<T?, ServiceError> where T : Identifiable & Codable {
+    func delete<T>(byId id: T.ID) -> Future<T?, ServiceError> where T : Entity {
         return Future { promise in
             DispatchQueue.global(qos: .background).async {
                 var all: [T] = self.getAllData()

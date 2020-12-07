@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Task: Identifiable, Codable {
+struct Task: Entity {
     var id: Int?
     var title: String
     var description: String?
