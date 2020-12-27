@@ -27,6 +27,9 @@ struct TagView: View {
         .foregroundColor(self.color.contrastFontColor)
         .cornerRadius(10)
         .padding(2)
+        .onTapGesture {
+            self.action()
+        }
     }
 }
 
