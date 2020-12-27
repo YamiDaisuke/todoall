@@ -28,6 +28,10 @@
 		F8B4254A2549011900F93641 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B425492549011900F93641 /* LocalStore.swift */; };
 		F8B42550254904DC00F93641 /* Identifiable+TypeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B4254F254904DC00F93641 /* Identifiable+TypeName.swift */; };
 		F8B42558254910ED00F93641 /* TestLocalProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B42557254910ED00F93641 /* TestLocalProvider.swift */; };
+		F8B49BAD2597F508005D91E7 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B49BAC2597F508005D91E7 /* TagView.swift */; };
+		F8B49BB22597F67C005D91E7 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B49BB12597F67C005D91E7 /* ColorExtensions.swift */; };
+		F8B49BBD2598D683005D91E7 /* TagCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B49BBC2598D683005D91E7 /* TagCloud.swift */; };
+		F8B49BCE2598E741005D91E7 /* SingleAxisGeometryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B49BCD2598E741005D91E7 /* SingleAxisGeometryReader.swift */; };
 		F8B794B9254A2C1C00F67DB8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B794B8254A2C1C00F67DB8 /* HomeView.swift */; };
 		F8B794BE254A313B00F67DB8 /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B794BD254A313B00F67DB8 /* CreateTaskViewModel.swift */; };
 		F8B794C3254A36E800F67DB8 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B794C2254A36E800F67DB8 /* CreateTaskView.swift */; };
@@ -78,6 +82,10 @@
 		F8B425492549011900F93641 /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		F8B4254F254904DC00F93641 /* Identifiable+TypeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Identifiable+TypeName.swift"; sourceTree = "<group>"; };
 		F8B42557254910ED00F93641 /* TestLocalProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLocalProvider.swift; sourceTree = "<group>"; };
+		F8B49BAC2597F508005D91E7 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		F8B49BB12597F67C005D91E7 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		F8B49BBC2598D683005D91E7 /* TagCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCloud.swift; sourceTree = "<group>"; };
+		F8B49BCD2598E741005D91E7 /* SingleAxisGeometryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAxisGeometryReader.swift; sourceTree = "<group>"; };
 		F8B794B8254A2C1C00F67DB8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F8B794BD254A313B00F67DB8 /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
 		F8B794C2254A36E800F67DB8 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
@@ -112,6 +120,9 @@
 			isa = PBXGroup;
 			children = (
 				81B2C2632543884C00F18B79 /* TaskCheckMark.swift */,
+				F8B49BAC2597F508005D91E7 /* TagView.swift */,
+				F8B49BBC2598D683005D91E7 /* TagCloud.swift */,
+				F8B49BCD2598E741005D91E7 /* SingleAxisGeometryReader.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -244,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				F8B4254F254904DC00F93641 /* Identifiable+TypeName.swift */,
+				F8B49BB12597F67C005D91E7 /* ColorExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -379,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8B49BAD2597F508005D91E7 /* TagView.swift in Sources */,
 				81DCC2D12542640E007A20DF /* TaskListViewModel.swift in Sources */,
 				F8B42550254904DC00F93641 /* Identifiable+TypeName.swift in Sources */,
 				81DCC2D6254268FE007A20DF /* TaskRowView.swift in Sources */,
@@ -389,8 +402,11 @@
 				F8B425452548FEFF00F93641 /* Store.swift in Sources */,
 				F8B794BE254A313B00F67DB8 /* CreateTaskViewModel.swift in Sources */,
 				81DCC296254257E3007A20DF /* AppDelegate.swift in Sources */,
+				F8B49BB22597F67C005D91E7 /* ColorExtensions.swift in Sources */,
 				81DCC298254257E3007A20DF /* SceneDelegate.swift in Sources */,
+				F8B49BBD2598D683005D91E7 /* TagCloud.swift in Sources */,
 				81B2C2642543884C00F18B79 /* TaskCheckMark.swift in Sources */,
+				F8B49BCE2598E741005D91E7 /* SingleAxisGeometryReader.swift in Sources */,
 				81DCC2CE254260FD007A20DF /* ServiceError.swift in Sources */,
 				81DCC29A254257E3007A20DF /* ContentView.swift in Sources */,
 				F832DBDD257EE14500ED29F2 /* Entity.swift in Sources */,
@@ -495,7 +511,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -550,7 +566,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
