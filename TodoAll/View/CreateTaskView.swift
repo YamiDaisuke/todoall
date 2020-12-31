@@ -26,7 +26,7 @@ struct CreateTaskView: View {
             DatePicker("Due Date", selection: self.$viewModel.dueDate)
                 .padding()
             
-            ZStack(alignment: Alignment(horizontal: .leading, vertical: .top)) {
+            ZStack(alignment: .topLeading) {
                 TextEditor(text: $viewModel.taskDescription)
                     .background(Color.clear)
                     .padding()
