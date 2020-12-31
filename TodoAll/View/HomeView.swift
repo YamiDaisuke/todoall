@@ -30,7 +30,7 @@ struct HomeView: View {
         }.sheet(isPresented: self.$showCreateSheet, onDismiss: {
             self.viewModel.refresh()
         }, content: {
-            CreateTaskView(viewModel: self.viewModel.getCreateViewModel())
+            CreateTaskView(viewModel: self.viewModel.getCreateViewModel(), presented: self.$showCreateSheet)
         })
     }
 }
