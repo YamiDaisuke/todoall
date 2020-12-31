@@ -18,7 +18,7 @@ struct TagCloud: View {
     
     var body: some View {
         VStack {
-            SingleAxisGeometryReader() { width in
+            SingleAxisGeometryReader(alignment: .topLeading) { width in
                 generateContent(withWidth: width)
             }
             if isEditing {
@@ -110,6 +110,11 @@ struct TagCloud_Previews: PreviewProvider {
         
         TagCloud(
             tags: .constant(["Tag1", "Tag 2", "Taaaaaaag3", "Tag4", "Tag5", "Tag6", "Tag7", "Tag8", "Some long tag"]),
+            isEditing: false
+        )
+        
+        TagCloud(
+            tags: .constant(["Tag1"]),
             isEditing: false
         )
     }

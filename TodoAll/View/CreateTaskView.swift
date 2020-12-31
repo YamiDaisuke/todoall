@@ -11,6 +11,7 @@ import SwiftUI
 struct CreateTaskView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: CreateTaskViewModel
+    @Binding var presented: Bool
     
     var body: some View {
         VStack {
@@ -18,16 +19,51 @@ struct CreateTaskView: View {
                 Text("New Task").font(.title)
                 Spacer()
             }.padding()
-            TextField("Title", text:$viewModel.title )
+            
+            TextField("Title", text: self.$viewModel.title )
+                .padding()
+            
+            DatePicker("Due Date", selection: self.$viewModel.dueDate)
+                .padding()
+            
+            ZStack(alignment: .topLeading) {
+                TextEditor(text: $viewModel.taskDescription)
+                    .background(Color.clear)
+                    .padding()
+                
+                if self.viewModel.taskDescription.isEmpty {
+                    Text("Description")
+                        .foregroundColor(Color(UIColor.placeholderText))
+                        .padding(.top, 8)
+                        .padding(.leading, 2)
+                        .padding()
+                        .disabled(true)
+                        .allowsHitTesting(false)
+                }
+            }
+            
+            TagCloud(tags: self.$viewModel.tags, isEditing: true)
                 .padding()
             
             HStack {
                 Spacer()
-                Button("Save") {
+                Button(self.viewModel.saving ? "Saving..." : "Save") {
                     self.viewModel.save()
-                    self.presentationMode.wrappedValue.dismiss()
-                }.disabled(!viewModel.valid)
+                }.disabled(!self.viewModel.valid || self.viewModel.saving)
+                
+                if self.viewModel.saving && !self.viewModel.saved {
+                    ProgressView()
+                        .padding([.leading], 8)
+                        .padding([.trailing])
+                        // A trick to dimiss this sheet only after
+                        // the saving process have finish
+                        .onDisappear {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                }
             }.padding()
+            
+            
         }
     }
 }
@@ -37,6 +73,6 @@ struct CreateTaskView_Previews: PreviewProvider {
         let mock = MockTaskService()
 
         let vm = CreateTaskViewModel(service: mock, userId: 1)
-        CreateTaskView(viewModel: vm)
+        CreateTaskView(viewModel: vm, presented: .constant(true))
     }
 }
